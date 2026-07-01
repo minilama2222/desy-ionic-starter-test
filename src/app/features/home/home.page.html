@@ -16,11 +16,12 @@
           <desyi-card [title]="feature.title">
             <div class="feature-card">
               <div class="feature-card__header">
-                <desyi-icon
-                  [iconName]="feature.icon"
+                <ion-icon
+                  [name]="feature.icon"
                   [color]="feature.iconColor"
                   size="large"
-                ></desyi-icon>
+                  class="feature-card__icon"
+                ></ion-icon>
               </div>
               <p class="feature-card__description">{{ feature.description }}</p>
               <desyi-button

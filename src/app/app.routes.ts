@@ -19,6 +19,8 @@ export const routes: Routes = [
   },
   {
     path: 'tabs-example',
+    loadComponent: () =>
+      import('./features/tabs-example/tabs-example.page').then((m) => m.TabsExamplePage),
     loadChildren: () =>
       import('./features/tabs-example/tabs.routes').then((m) => m.TABS_ROUTES)
   },
