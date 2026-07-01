@@ -4,6 +4,7 @@ import {
   IonContent,
   IonCol,
   IonGrid,
+  IonIcon,
   IonNote,
   IonRow
 } from '@ionic/angular/standalone';
@@ -42,6 +43,7 @@ interface FeatureCard {
     IonContent,
     IonCol,
     IonGrid,
+    IonIcon,
     IonNote,
     IonRow,
     DesyiButtonComponent,

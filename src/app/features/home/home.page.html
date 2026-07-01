@@ -13,16 +13,17 @@
     <ion-row>
       @for (feature of features; track feature.routerLink) {
         <ion-col size="12" size-md="6" class="ion-margin-bottom">
-          <desyi-card [title]="feature.title">
-            <div class="feature-card">
-              <div class="feature-card__header">
-                <ion-icon
-                  [name]="feature.icon"
-                  [color]="feature.iconColor"
-                  size="large"
-                  class="feature-card__icon"
-                ></ion-icon>
-              </div>
+          <desyi-card>
+            <div header class="feature-card__header">
+              <ion-icon
+                [name]="feature.icon"
+                [color]="feature.iconColor"
+                size="large"
+                class="feature-card__icon"
+              ></ion-icon>
+              <desyi-text headingLevel="c-h3" [text]="feature.title"></desyi-text>
+            </div>
+            <div content class="feature-card__body">
               <p class="feature-card__description">{{ feature.description }}</p>
               <desyi-button
                 [text]="feature.cta"
