@@ -35,6 +35,25 @@ export const routes: Routes = [
       import('./features/list-example/list-example.page').then((m) => m.ListExamplePage)
   },
   {
+    // Test fork: real-world páginas de "trámites"
+    path: 'tramites',
+    title: 'Mis trámites · DESY Ionic Test',
+    loadComponent: () =>
+      import('./features/tramites/tramites-list/tramites-list.page').then((m) => m.TramitesListPage)
+  },
+  {
+    path: 'tramites/nueva',
+    title: 'Nueva solicitud · DESY Ionic Test',
+    loadComponent: () =>
+      import('./features/tramites/solicitud-form/solicitud-form.page').then((m) => m.SolicitudFormPage)
+  },
+  {
+    path: 'tramites/:id',
+    title: 'Detalle del trámite · DESY Ionic Test',
+    loadComponent: () =>
+      import('./features/tramites/tramite-detail/tramite-detail.page').then((m) => m.TramiteDetailPage)
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }

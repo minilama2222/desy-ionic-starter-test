@@ -1,0 +1,105 @@
+<app-header title="Nueva solicitud" [showBackButton]="true" defaultHref="/tramites"></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if (submitted()) {
+    <div class="submitted">
+      <desyi-text headingLevel="c-h2" text="Solicitud enviada correctamente"></desyi-text>
+      <p>Serás redirigido al listado de trámites…</p>
+    </div>
+  } @else {
+    <desyi-step-list [steps]="steps"></desyi-step-list>
+
+    @switch (step()) {
+      @case (1) {
+        <section class="step" [formGroup]="personalForm">
+          <desyi-text headingLevel="c-h3" text="Datos personales"></desyi-text>
+          <ion-note>Todos los campos son obligatorios salvo indicación contraria.</ion-note>
+
+          <div class="form-grid">
+            <desyi-input label="DNI / NIE" name="dni" type="text" formControlName="dni"></desyi-input>
+            <desyi-input label="Nombre completo" name="nombre" type="text" formControlName="nombre"></desyi-input>
+            <desyi-input label="Correo electrónico" name="email" type="email" formControlName="email"></desyi-input>
+            <desyi-input label="Teléfono" name="telefono" type="tel" formControlName="telefono"></desyi-input>
+            <desyi-input label="Dirección" name="direccion" type="text" formControlName="direccion"></desyi-input>
+          </div>
+        </section>
+      }
+      @case (2) {
+        <section class="step" [formGroup]="docForm">
+          <desyi-text headingLevel="c-h3" text="Documentación"></desyi-text>
+          <ion-note>Aporta documentación si es necesaria para tu trámite.</ion-note>
+
+          <div class="form-grid">
+            <desyi-textarea
+              label="Observaciones"
+              name="observaciones"
+              formControlName="observaciones"
+              [rows]="6"
+            ></desyi-textarea>
+
+            <div class="file-row">
+              <label class="file-row__label" for="solicitud-files">Adjuntar documentación</label>
+              <input id="solicitud-files" type="file" multiple class="file-row__input" />
+              <ion-note>No hay componente nativo en desy-ionic para file upload; usamos input nativo en este fork.</ion-note>
+            </div>
+          </div>
+        </section>
+      }
+      @case (3) {
+        <section class="step" [formGroup]="confirmForm">
+          <desyi-text headingLevel="c-h3" text="Confirmación"></desyi-text>
+          <p>Revisa los datos y acepta las declaraciones para enviar la solicitud.</p>
+
+          <div class="form-grid">
+            <desyi-checkbox
+              name="acepta"
+              text="Acepto que mis datos sean tratados conforme al RGPD"
+              formControlName="acepta"
+            ></desyi-checkbox>
+            <desyi-checkbox
+              name="declaraciones"
+              text="Declaro bajo mi responsabilidad que los datos aportados son veraces"
+              formControlName="declaraciones"
+            ></desyi-checkbox>
+          </div>
+
+          <desyi-card title="Resumen">
+            <p><strong>DNI:</strong> {{ personalForm.get('dni')?.value || '—' }}</p>
+            <p><strong>Nombre:</strong> {{ personalForm.get('nombre')?.value || '—' }}</p>
+            <p><strong>Email:</strong> {{ personalForm.get('email')?.value || '—' }}</p>
+            <p><strong>Observaciones:</strong> {{ docForm.get('observaciones')?.value || '—' }}</p>
+          </desyi-card>
+        </section>
+      }
+    }
+
+    <div class="step-actions">
+      @if (step() > 1) {
+        <desyi-button
+          text="Atrás"
+          icon="arrow-back-outline"
+          iconSlot="start"
+          [classes]="'c-button--secondary'"
+          (onClickEmit)="goBack()"
+        ></desyi-button>
+      }
+      @if (step() < 3) {
+        <desyi-button
+          text="Continuar"
+          icon="arrow-forward-outline"
+          iconSlot="end"
+          [classes]="'c-button--primary'"
+          (onClickEmit)="goNext()"
+        ></desyi-button>
+      } @else {
+        <desyi-button
+          text="Enviar solicitud"
+          icon="paper-plane-outline"
+          iconSlot="end"
+          [classes]="'c-button--primary'"
+          (onClickEmit)="submit()"
+        ></desyi-button>
+      }
+    </div>
+  }
+</ion-content>

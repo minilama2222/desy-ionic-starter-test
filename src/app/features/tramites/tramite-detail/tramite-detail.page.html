@@ -1,0 +1,75 @@
+<app-header title="Detalle del trámite" [showBackButton]="true" defaultHref="/tramites"></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if (loading()) {
+    <div class="loading">
+      <ion-spinner name="dots"></ion-spinner>
+      <span>Cargando…</span>
+    </div>
+  } @else if (notFound()) {
+    <div class="not-found">
+      <desyi-icon name="alert-circle-outline" size="large" color="warning"></desyi-icon>
+      <desyi-text headingLevel="c-h3" text="Trámite no encontrado"></desyi-text>
+      <p>El expediente solicitado no existe o no está disponible.</p>
+      <desyi-button text="Volver al listado" link="/tramites" icon="arrow-back-outline" iconSlot="start"></desyi-button>
+    </div>
+  } @else {
+    @let t = tramite();
+    @if (t) {
+      <article class="detail">
+        <header class="detail__header">
+          <desyi-text headingLevel="c-h2" [text]="t.nombre"></desyi-text>
+          <desyi-pill [text]="statusLabel(t.estado)" [classes]="pillClass(t.estado)"></desyi-pill>
+        </header>
+
+        <p class="detail__id">Expediente <strong>{{ t.id }}</strong></p>
+        <p class="detail__description">{{ t.descripcion }}</p>
+
+        @if (t.estado === 'requiere-subsanacion') {
+          <desyi-card [title]="'Acción requerida'" [subtitle]="'Tienes documentación pendiente de aportar'">
+            <p>
+              El organismo ha revisado tu solicitud y necesita documentación adicional.
+              Tienes hasta el <strong>15/07/2026</strong> para responder.
+            </p>
+          </desyi-card>
+        }
+
+        <section class="detail__section">
+          <desyi-text headingLevel="c-h3" text="Información"></desyi-text>
+          <dl class="kv">
+            <dt>Organismo</dt>
+            <dd>{{ t.organismo }}</dd>
+            <dt>Fecha de solicitud</dt>
+            <dd>{{ t.fechaSolicitud }}</dd>
+            <dt>Último movimiento</dt>
+            <dd>{{ t.ultimoMovimiento }}</dd>
+            <dt>Documentos aportados</dt>
+            <dd>{{ t.documentos }}</dd>
+          </dl>
+        </section>
+
+        <section class="detail__actions">
+          <desyi-button
+            text="Aportar documentación"
+            icon="cloud-upload-outline"
+            iconSlot="start"
+            [classes]="'c-button--primary'"
+            (onClickEmit)="subsanar()"
+          ></desyi-button>
+          <desyi-button
+            text="Consultar dudas"
+            icon="help-circle-outline"
+            iconSlot="start"
+            [classes]="'c-button--secondary'"
+          ></desyi-button>
+          <desyi-button
+            text="Volver"
+            icon="arrow-back-outline"
+            iconSlot="start"
+            link="/tramites"
+          ></desyi-button>
+        </section>
+      </article>
+    }
+  }
+</ion-content>

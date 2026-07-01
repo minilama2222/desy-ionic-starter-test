@@ -1,0 +1,68 @@
+<app-header title="Mis trámites" [showBackButton]="true" defaultHref="/home"></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="summary">
+    <desyi-text headingLevel="c-h2" text="Mis trámites"></desyi-text>
+    <p class="summary__counts">
+      <strong>{{ counts().total }}</strong> totales ·
+      <strong>{{ counts().pendientes }}</strong> pendientes ·
+      <strong>{{ counts().subsanacion }}</strong> requieren subsanación
+    </p>
+  </div>
+
+  <div class="segment-wrapper">
+    <desyi-segment
+      [segmentButtons]="segmentButtons"
+      [value]="filter()"
+      (onValueChange)="onFilterChange($event)"
+    ></desyi-segment>
+  </div>
+
+  <desyi-searchbar
+    placeholder="Buscar por nombre o número de expediente"
+    (onInputEmit)="onSearch($event.detail?.value)"
+  ></desyi-searchbar>
+
+  @if (loading()) {
+    <div class="loading">
+      <ion-spinner name="dots"></ion-spinner>
+      <span>Cargando trámites…</span>
+    </div>
+  } @else if (visibleItems().length === 0) {
+    <app-empty-state
+      icon="document-outline"
+      title="Sin trámites"
+      description="No hay trámites que coincidan con el filtro actual. Prueba a cambiar el segmento o limpiar la búsqueda."
+    ></app-empty-state>
+  } @else {
+    <ul class="tramites-list">
+      @for (item of visibleItems(); track item.id) {
+        <li class="tramite-item">
+          <a [routerLink]="['/tramites', item.id]" class="tramite-item__link">
+            <desyi-card [title]="item.nombre" [subtitle]="item.id">
+              <div class="tramite-item__body">
+                <div class="tramite-item__row">
+                  <desyi-icon name="business-outline" color="medium"></desyi-icon>
+                  <span>{{ item.organismo }}</span>
+                </div>
+                <div class="tramite-item__row">
+                  <desyi-icon name="calendar-outline" color="medium"></desyi-icon>
+                  <span>Solicitado el {{ item.fechaSolicitud }}</span>
+                </div>
+                <div class="tramite-item__footer">
+                  <desyi-pill
+                    [text]="statusLabel(item.estado)"
+                    [classes]="pillClass(item.estado)"
+                  ></desyi-pill>
+                  @if (item.documentos > 0) {
+                    <ion-note>{{ item.documentos }} documentos</ion-note>
+                  }
+                </div>
+              </div>
+            </desyi-card>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</ion-content>
