@@ -1,0 +1,8 @@
+<div class="empty-state">
+  <ion-icon [name]="icon" class="empty-state__icon" aria-hidden="true"></ion-icon>
+  <h2 class="empty-state__title">{{ title }}</h2>
+  @if (description) {
+    <p class="empty-state__description">{{ description }}</p>
+  }
+  <ng-content></ng-content>
+</div>

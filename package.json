@@ -1,0 +1,93 @@
+{
+  "name": "desy-ionic-starter",
+  "version": "1.0.0",
+  "description": "Starter project (boilerplate) for building mobile and web apps with DESY Ionic — the Gobierno de Aragón Design System on top of Angular 19 and Ionic 8.",
+  "author": {
+    "name": "Desy (SDA Servicios Digitales de Aragón)",
+    "email": "sda@aragon.es"
+  },
+  "keywords": [
+    "desy",
+    "gobierno de aragón",
+    "design system",
+    "ionic",
+    "angular",
+    "capacitor",
+    "starter",
+    "boilerplate"
+  ],
+  "license": "EUPL-1.2",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "dev": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "format": "prettier --write \"**/*.{js,mjs,ts,mts,d.ts,html,css,scss,sass,json,md,yml,yaml}\"",
+    "e2e": "playwright test",
+    "playwright:install": "playwright install --with-deps chromium",
+    "ionic:serve": "ng serve --host 0.0.0.0 --port 8100",
+    "cap:sync": "cap sync",
+    "cap:open:android": "cap open android",
+    "cap:open:ios": "cap open ios",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@angular/animations": "^19.1.6",
+    "@angular/common": "^19.1.6",
+    "@angular/compiler": "^19.1.6",
+    "@angular/core": "^19.1.6",
+    "@angular/forms": "^19.1.6",
+    "@angular/platform-browser": "^19.1.6",
+    "@angular/platform-browser-dynamic": "^19.1.6",
+    "@angular/router": "^19.1.6",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/ios": "^8.0.0",
+    "@ionic/angular": "^8.4.3",
+    "desy-ionic": "^1.4.3",
+    "desy-html": "^17.0.0",
+    "ionicons": "^7.4.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.1.7",
+    "@angular-eslint/builder": "19.1.0",
+    "@angular-eslint/eslint-plugin": "19.1.0",
+    "@angular-eslint/eslint-plugin-template": "19.1.0",
+    "@angular-eslint/schematics": "19.1.0",
+    "@angular-eslint/template-parser": "19.1.0",
+    "@angular/cli": "~19.1.7",
+    "@angular/compiler-cli": "^19.1.6",
+    "@capacitor/cli": "^8.0.0",
+    "@playwright/test": "^1.52.0",
+    "@types/jasmine": "~5.1.4",
+    "@types/node": "^22.8.4",
+    "@typescript-eslint/eslint-plugin": "^8.12.2",
+    "@typescript-eslint/parser": "^8.12.2",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.13.0",
+    "husky": "^9.1.7",
+    "jasmine-core": "~5.4.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.49",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.14",
+    "ts-node": "~10.9.2",
+    "typescript": "~5.7.3"
+  },
+  "lint-staged": {
+    "**/*.{js,mjs,ts,mts,d.ts,html,css,scss,sass,json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+import { Routes } from '@angular/router';
+
+/**
+ * Top-level routes for the DESY Ionic Starter.
+ *
+ * Every feature is lazy-loaded with `loadComponent` to keep the initial bundle small.
+ * Add new pages here following the same pattern: a `path` and a `loadComponent`.
+ */
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    title: 'Inicio · DESY Ionic',
+    loadComponent: () => import('./features/home/home.page').then((m) => m.HomePage)
+  },
+  {
+    path: 'tabs-example',
+    loadChildren: () =>
+      import('./features/tabs-example/tabs.routes').then((m) => m.TABS_ROUTES)
+  },
+  {
+    path: 'forms-example',
+    title: 'Formularios · DESY Ionic',
+    loadComponent: () =>
+      import('./features/forms-example/forms-example.page').then((m) => m.FormsExamplePage)
+  },
+  {
+    path: 'list-example',
+    title: 'Listas · DESY Ionic',
+    loadComponent: () =>
+      import('./features/list-example/list-example.page').then((m) => m.ListExamplePage)
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
+  }
+];

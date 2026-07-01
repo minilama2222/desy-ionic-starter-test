@@ -1,0 +1,46 @@
+<app-header title="DESY Ionic Starter" [showBackButton]="false"></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <section class="hero">
+    <desyi-text headingLevel="c-h1" text="Bienvenido"></desyi-text>
+    <p>
+      Plantilla lista para construir aplicaciones móviles y web con el Sistema de Diseño del
+      Gobierno de Aragón sobre Angular 19 e Ionic 8.
+    </p>
+  </section>
+
+  <ion-grid class="features-grid">
+    <ion-row>
+      @for (feature of features; track feature.routerLink) {
+        <ion-col size="12" size-md="6" class="ion-margin-bottom">
+          <desyi-card [title]="feature.title">
+            <div class="feature-card">
+              <div class="feature-card__header">
+                <desyi-icon
+                  [iconName]="feature.icon"
+                  [color]="feature.iconColor"
+                  size="large"
+                ></desyi-icon>
+              </div>
+              <p class="feature-card__description">{{ feature.description }}</p>
+              <desyi-button
+                [text]="feature.cta"
+                [link]="feature.routerLink"
+                icon="arrow-forward-outline"
+                iconSlot="end"
+                [classes]="'c-button--primary'"
+              ></desyi-button>
+            </div>
+          </desyi-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
+  <ion-note class="ion-padding-top">
+    Esta página usa componentes <code>desyi-*</code> directamente. Personalízala editando
+    <code>src/app/features/home/home.page.ts</code>.
+  </ion-note>
+</ion-content>
+
+<app-footer></app-footer>

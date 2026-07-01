@@ -1,0 +1,56 @@
+<app-header title="Listas" [showBackButton]="true" defaultHref="/home"></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <desyi-text headingLevel="c-h2" text="Listas filtrables"></desyi-text>
+  <p>
+    Usa el segmento para filtrar la lista entre <strong>Todos</strong>,
+    <strong>Activos</strong> e <strong>Inactivos</strong>. Toca un item para
+    seleccionarlo, marca la casilla para cambiar su estado.
+  </p>
+
+  <div class="segment-wrapper">
+    <desyi-segment
+      [segmentButtons]="segmentButtons"
+      [value]="filter()"
+      (onValueChange)="onFilterChange($event)"
+    ></desyi-segment>
+  </div>
+
+  @if (visibleItems().length === 0) {
+    <app-empty-state
+      icon="archive-outline"
+      title="Lista vacía"
+      description="No hay elementos que coincidan con este filtro."
+    ></app-empty-state>
+  } @else {
+    <ul class="list">
+      @for (item of visibleItems(); track item.id) {
+        <li class="list__item" [class.is-selected]="selected() === item.id" (click)="select(item.id)">
+          <desyi-radio
+            [checked]="selected() === item.id"
+            [text]="item.name"
+            [value]="item.id"
+            name="list-example-radio"
+          ></desyi-radio>
+
+          <ion-item lines="none" class="list__detail">
+            <ion-label>
+              <p>{{ item.detail }}</p>
+              <ion-note [color]="item.status === 'active' ? 'success' : 'medium'">
+                {{ item.status === 'active' ? 'Activo' : 'Inactivo' }}
+              </ion-note>
+            </ion-label>
+            <desyi-checkbox
+              slot="end"
+              [checked]="item.status === 'active'"
+              text="Activo"
+              [value]="item.id"
+              name="list-example-checkbox"
+              (change)="toggleDone(item.id, $event)"
+            ></desyi-checkbox>
+          </ion-item>
+        </li>
+      }
+    </ul>
+  }
+</ion-content>

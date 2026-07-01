@@ -1,0 +1,89 @@
+<app-header title="Formularios" [showBackButton]="true" defaultHref="/home"></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <desyi-text headingLevel="c-h2" text="Formulario reactivo"></desyi-text>
+    <ion-note>
+      Todos los campos usan componentes <code>desyi-*</code> enlazados a un
+      <code>FormGroup</code>. El botón <strong>Enviar</strong> muestra el JSON
+      resultante debajo del formulario.
+    </ion-note>
+
+    <ion-card class="form-card">
+      <ion-card-header>
+        <ion-card-title>Datos personales</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="form-grid">
+        <desyi-input
+          label="Nombre completo"
+          type="text"
+          formControlName="name"
+          name="name"
+        ></desyi-input>
+
+        <desyi-input
+          label="Correo electrónico"
+          type="email"
+          formControlName="email"
+          name="email"
+        ></desyi-input>
+
+        <desyi-select
+          label="Provincia"
+          formControlName="province"
+          name="province"
+          [items]="provinceItems"
+        ></desyi-select>
+
+        <desyi-datetime
+          label="Fecha de nacimiento"
+          formControlName="birthDate"
+          name="birthDate"
+        ></desyi-datetime>
+
+        <desyi-radio-group
+          label="Género"
+          formControlName="gender"
+          name="gender"
+          [items]="genderItems"
+        ></desyi-radio-group>
+
+        <desyi-checkbox-group
+          label="Intereses"
+          formGroupName="interests"
+          name="interests"
+          [groups]="interestGroups"
+        ></desyi-checkbox-group>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="form-actions">
+      <desyi-button
+        text="Enviar"
+        icon="checkmark-outline"
+        iconSlot="start"
+        type="submit"
+        [classes]="'c-button--primary'"
+      ></desyi-button>
+      <desyi-button
+        text="Limpiar"
+        icon="refresh-outline"
+        iconSlot="start"
+        type="button"
+        [classes]="'c-button--secondary'"
+        (onClickEmit)="reset()"
+      ></desyi-button>
+    </div>
+  </form>
+
+  @if (submittedValue(); as value) {
+    <ion-card class="result-card">
+      <ion-card-header>
+        <ion-card-title>Resultado</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <pre>{{ value | json }}</pre>
+      </ion-card-content>
+    </ion-card>
+  }
+</ion-content>

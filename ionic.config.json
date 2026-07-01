@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/@ionic/cli-config-schema.json",
+  "name": "desy-ionic-starter",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
